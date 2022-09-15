@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cplndb',
-        'USER': 'root',
-        'PASSWORD': '123456789',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9a4rvtpmg98jl',
+        'USER': 'npepwancfjngkw',
+        'PASSWORD': '138fddf18ba988034dfa0beab17219ee1d3a6cd0c15fad727afb3b0a732bb03b',
+        'HOST': 'ec2-52-200-5-135.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
