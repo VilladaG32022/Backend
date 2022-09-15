@@ -59,3 +59,17 @@ class PersonTable(APIView):
             serializeobj.save()
             return Response("Person created")
         return Response(serializeobj.errors)
+
+@api_view(['GET', 'POST'])
+def inscriptions(request):
+    if request.method == 'POST':
+        serializeobj = PersonSerializer(data=request.data)
+        if serializeobj.is_valid():
+            serializeobj.save()
+            return Response("Person created")
+        else:
+            return Response("Invalid Person")
+    else:
+        users = Person.objects.all()
+        serializer = PersonSerializer(users, many=True)
+        return Response(serializer.data)

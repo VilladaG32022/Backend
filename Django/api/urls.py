@@ -5,6 +5,7 @@ from api import views
 
 urlpatterns = [
     path('UserPage/', views.getUserPage),
+    path('Inscriptions/', views.inscriptions),
     path('Person/Update/<int:pk>', views.ToVolunteer.as_view()),
     path('Person/', views.PersonTable.as_view()),
 ]
