@@ -16,6 +16,7 @@ Including another URLconf
 from django.urls import include, path, re_path
 from django.contrib import admin
 from api import *
+admin.site.site_header = "Cocinamos por los niños"
 
 from django.conf import settings
 from django.conf.urls.static import static
