@@ -75,13 +75,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Library Admin",
+    "site_title": "CPLN",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Cocinamos por los niños",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Library",
+    "site_brand": "CocinamosPorLosNiños",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "logo_color.png",
@@ -93,7 +93,11 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Bienvenido a la administracion de 'Cocinamos por los niños'",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "ITS Villada",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
 }
 
 
