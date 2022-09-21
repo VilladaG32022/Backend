@@ -15,7 +15,7 @@ def getUserPage(request):
     return Response(serializer.data)
 
 
-class ToVolunteer(APIView):
+'''class ToVolunteer(APIView):
     def put(self, request, pk):
         jd = json.loads(request.body)
         persons = list(Person.objects.filter(pk=pk).values())
@@ -44,10 +44,10 @@ class ToVolunteer(APIView):
         if serializeobj.is_valid():
             serializeobj.save()
             return Response("Person created")
-        return Response(serializeobj.errors)
+        return Response(serializeobj.errors)'''
 
 
-class PersonTable(APIView):
+'''class PersonTable(APIView):
     def get(self, request):
         users = Person.objects.all()
         serializer = PersonSerializer(users, many=True)
@@ -58,7 +58,7 @@ class PersonTable(APIView):
         if serializeobj.is_valid():
             serializeobj.save()
             return Response("Person created")
-        return Response(serializeobj.errors)
+        return Response(serializeobj.errors)'''
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):
@@ -73,3 +73,34 @@ def inscriptions(request):
         users = Person.objects.all()
         serializer = PersonSerializer(users, many=True)
         return Response(serializer.data)
+
+@api_view(['PUT', 'POST','DELETE'])
+def notices(self, request, pk):
+    if request.method == 'PUT':
+        images = list(DailyCard.objects.filter(pk=pk).values())
+        if len(images) > 0:
+            serializeobj=DailyCardSerializer(images,data=request.data)
+            if serializeobj.is_valid():
+                serializeobj.save()
+                datos = {'message': "Success"}
+            else:
+                datos = {'message': "Bad request..."}
+        else:
+            datos = {'message': "Notice not found..."}
+        return JsonResponse(datos)
+
+    if request.method == 'POST':
+        newExpo = DailyCard.objects.all(data=request.data)
+        if newExpo.is_valid():
+            newExpo.save()
+            return Response("Notice created")
+        return Response(newExpo.errors)
+
+    if request.method == 'DELETE':
+        myExpo = DailyCard.objects.filter(pk=pk).first()
+        if myExpo != None:
+            myExpo.delete()
+            datos = {'message': "Success"}
+        else:
+            datos = {'message': "Notice not found..."}
+        return JsonResponse(datos)

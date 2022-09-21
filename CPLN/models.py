@@ -31,6 +31,10 @@ class SauceQuantity(models.Model):
     def _str_(self):
         return "{}{}".format(self.sandwich.str(), self.sauce.str_())
 
+class DailyCard(models.Model):
+    img = models.ImageField()
+    description = models.CharField(max_length=200)
+
 class Address(models.Model):
     #id_addres = models.IntegerField(unique=True, null=False, blank=False)
     street_1 = models.CharField(max_length=255, blank=True, null=True)
@@ -102,6 +106,7 @@ class Person(models.Model):
     email = models.CharField(max_length=50)
     age = models.IntegerField()
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100)
     is_candidate = models.BooleanField(default=True)
 
     def __str__(self):
