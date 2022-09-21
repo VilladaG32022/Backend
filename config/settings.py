@@ -100,6 +100,10 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "darkly",
 }
 
+CORS_ORIGIN_WHITELIST =[
+    'https://localhost:3000',
+    'http://localhost:3000'
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
