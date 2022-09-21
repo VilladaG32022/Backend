@@ -9,7 +9,7 @@ my_models = apps.get_models()
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name","age", "neighborhood","telephone","email","is_candidate")
+    list_display = ("last_name", "first_name","dateOfBirth", "neighborhood","telephone","email","is_candidate")
     ordering = ("last_name",)
     search_fields = ("neighborhood","last_name")
     list_filter = ("neighborhood",)
