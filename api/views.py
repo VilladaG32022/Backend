@@ -1,3 +1,4 @@
+from urllib.request import Request
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from CPLN.models import *
@@ -90,21 +91,22 @@ def notices(self, request, pk):
         return JsonResponse(datos)
 
     elif request.method == 'POST':
-        newExpo = DailyCard.objects.all(data=request.data)
-        if newExpo.is_valid():
-            newExpo.save()
+        newNotice = DailyCard.objects.all(data=request.data)
+        if newNotice.is_valid():
+            newNotice.save()
             return Response("Notice created")
-        return Response(newExpo.errors)
+        return Response(newNotice.errors)
 
     elif request.method == 'DELETE':
-        myExpo = DailyCard.objects.filter(pk=pk).first()
-        if myExpo != None:
-            myExpo.delete()
+        myNotice = DailyCard.objects.filter(pk=pk).first()
+        if myNotice != None:
+            myNotice.delete()
             datos = {'message': "Success"}
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
     else:
+        pk = 0
         notices = DailyCard.objects.all()
         serializer = DailyCardSerializer(notices, many=True)
         return Response(serializer.data)
