@@ -74,8 +74,12 @@ def inscriptions(request):
         serializer = PersonSerializer(users, many=True)
         return Response(serializer.data)
 
-@api_view(['PUT', 'POST','DELETE'])
+@api_view(['GET','PUT', 'POST','DELETE'])
 def notices(self, request, pk):
+    if request.method == 'GET':
+        notices = DailyCard.objects.all()
+        serializer = DailyCardSerializer(notices, many=True)
+        return Response(serializer.data)
     if request.method == 'PUT':
         images = list(DailyCard.objects.filter(pk=pk).values())
         if len(images) > 0:
