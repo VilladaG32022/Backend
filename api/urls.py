@@ -7,4 +7,5 @@ urlpatterns = [
     path('UserPage/', views.getUserPage),
     path('Inscriptions/', views.inscriptions),
     path('Notices/', views.notices),
+    path('Notices/Get/', views.MyNotices),
 ]

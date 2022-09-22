@@ -6,7 +6,6 @@ from .serializers import *
 import json
 from django.http.response import JsonResponse
 
-from rest_framework.views import APIView
 
 
 @api_view(['GET'])
@@ -14,52 +13,6 @@ def getUserPage(request):
     users = Userpage.objects.all()
     serializer = UserPageSerializer(users, many=True)
     return Response(serializer.data)
-
-
-'''class ToVolunteer(APIView):
-    def put(self, request, pk):
-        jd = json.loads(request.body)
-        persons = list(Person.objects.filter(pk=pk).values())
-        if len(persons) > 0:
-            person = Person.objects.get(pk=pk)
-            person.is_candidate = False
-            person.save()
-            datos = {'message': "Success"}
-        else:
-            datos = {'message': "Company not found..."}
-        return JsonResponse(datos)
-
-    def Delete(self, request, pk):
-        if request.method == 'DELETE':
-            #jd = json.loads(request.body)
-            person = Person.objects.filter(pk=pk).first()
-            if person != None:
-                person.delete()
-                datos = {'message': "Success"}
-            else:
-                datos = {'message': "Company not found..."}
-            return JsonResponse(datos)
-
-    def post(self, request, pk):
-        serializeobj = PersonSerializer(data=request.data)
-        if serializeobj.is_valid():
-            serializeobj.save()
-            return Response("Person created")
-        return Response(serializeobj.errors)'''
-
-
-'''class PersonTable(APIView):
-    def get(self, request):
-        users = Person.objects.all()
-        serializer = PersonSerializer(users, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializeobj = PersonSerializer(data=request.data)
-        if serializeobj.is_valid():
-            serializeobj.save()
-            return Response("Person created")
-        return Response(serializeobj.errors)'''
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):
@@ -91,7 +44,7 @@ def notices(self, request, pk):
         return JsonResponse(datos)
 
     elif request.method == 'POST':
-        newNotice = DailyCard.objects.all(data=request.data)
+        newNotice = DailyCardSerializer(data=request.data)
         if newNotice.is_valid():
             newNotice.save()
             return Response("Notice created")
@@ -105,8 +58,9 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
-    if request.method == 'GET':
-        pk = 0
-        notices = DailyCard.objects.all()
-        serializer = DailyCardSerializer(notices, many=True)
-        return Response(serializer.data)
+
+@api_view(['GET'])
+def MyNotices(request):
+    notices = DailyCard.objects.all()
+    serializer = DailyCardSerializer(notices, many=True)
+    return Response(serializer.data)
