@@ -105,7 +105,7 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
-    else:
+    if request.method == 'GET':
         pk = 0
         notices = DailyCard.objects.all()
         serializer = DailyCardSerializer(notices, many=True)
