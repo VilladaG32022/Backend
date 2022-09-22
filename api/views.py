@@ -76,10 +76,6 @@ def inscriptions(request):
 
 @api_view(['GET','PUT', 'POST','DELETE'])
 def notices(self, request, pk):
-    if request.method == 'GET':
-        notices = DailyCard.objects.all()
-        serializer = DailyCardSerializer(notices, many=True)
-        return Response(serializer.data)
     if request.method == 'PUT':
         images = list(DailyCard.objects.filter(pk=pk).values())
         if len(images) > 0:
@@ -93,14 +89,14 @@ def notices(self, request, pk):
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
         newExpo = DailyCard.objects.all(data=request.data)
         if newExpo.is_valid():
             newExpo.save()
             return Response("Notice created")
         return Response(newExpo.errors)
 
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         myExpo = DailyCard.objects.filter(pk=pk).first()
         if myExpo != None:
             myExpo.delete()
@@ -108,3 +104,7 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
+    else:
+        notices = DailyCard.objects.all()
+        serializer = DailyCardSerializer(notices, many=True)
+        return Response(serializer.data)
