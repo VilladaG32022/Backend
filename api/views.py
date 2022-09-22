@@ -28,7 +28,13 @@ def inscriptions(request):
         serializer = PersonSerializer(users, many=True)
         return Response(serializer.data)
 
-@api_view(['GET','PUT', 'POST','DELETE'])
+@api_view(['GET'])
+def MyNotices(request):
+    notices = DailyCard.objects.all()
+    serializer = DailyCardSerializer(notices, many=True)
+    return Response(serializer.data)
+    
+@api_view(['PUT', 'POST','DELETE'])
 def notices(self, request, pk):
     if request.method == 'PUT':
         images = list(DailyCard.objects.filter(pk=pk).values())
@@ -58,9 +64,3 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
-
-@api_view(['GET'])
-def MyNotices(request):
-    notices = DailyCard.objects.all()
-    serializer = DailyCardSerializer(notices, many=True)
-    return Response(serializer.data)
