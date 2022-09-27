@@ -13,29 +13,8 @@ import datetime
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 
-class Sauce(models.Model):
-    name = models.CharField(max_length=100)
-
-    def _str_(self):
-        return self.name
-
-class Sandwich(models.Model):
-    name = models.CharField(max_length=100)
-    sauces = models.ManyToManyField(Sauce, through='SauceQuantity')
-
-    def _str_(self):
-        return self.name
-
-class SauceQuantity(models.Model):
-    sauce = models.ForeignKey(Sauce, on_delete=models.CASCADE)
-    sandwich = models.ForeignKey(Sandwich, on_delete=models.CASCADE)
-    extra_sauce = models.BooleanField(default=False)
-
-    def _str_(self):
-        return "{}{}".format(self.sandwich.str(), self.sauce.str_())
-
 class DailyCard(models.Model):
-    img = models.ImageField()
+    img = models.CharField(max_length=1000)
     description = models.CharField(max_length=200)
 
 class Address(models.Model):
