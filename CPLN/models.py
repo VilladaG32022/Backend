@@ -1,5 +1,3 @@
-import datetime
-from xmlrpc.client import _datetime
 from django.db import models
 import datetime
 
