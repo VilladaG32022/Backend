@@ -6,11 +6,11 @@ from django.http.response import JsonResponse
 
 
 
-@api_view(['GET'])
+'''@api_view(['GET'])
 def getUserPage(request):
     users = Userpage.objects.all()
     serializer = UserPageSerializer(users, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data)'''
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):

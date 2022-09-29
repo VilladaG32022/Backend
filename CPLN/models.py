@@ -37,13 +37,14 @@ class DailyCard(models.Model):
     img = models.CharField(max_length=1000)
     description = models.CharField(max_length=200)
 
+'''
 class Userpage(models.Model):
     user_name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True)
 
-'''
+
 class Address(models.Model):
     #id_addres = models.IntegerField(unique=True, null=False, blank=False)
     street_1 = models.CharField(max_length=255, blank=True, null=True)
