@@ -1,5 +1,3 @@
-import datetime
-from xmlrpc.client import _datetime
 from django.db import models
 import datetime
 
@@ -13,10 +11,39 @@ import datetime
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 
+class Neighborhood(models.Model):
+    neighborhood = models.CharField(max_length=255)
+    last_update = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.neighborhood)
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    telephone = models.CharField(max_length=20)
+    email = models.CharField(max_length=50)
+    dateOfBirth = models.DateField(default=datetime.date.today)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    address = models.CharField(max_length=100, default='sin direccion')
+    number = models.IntegerField(blank=True, null=True)
+    is_candidate = models.BooleanField(default=True)
+
+    def __str__(self):
+        return str(self.first_name + ' ' + self.last_name)
+
+
 class DailyCard(models.Model):
     img = models.CharField(max_length=1000)
     description = models.CharField(max_length=200)
 
+class Userpage(models.Model):
+    user_name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    last_update = models.DateTimeField(auto_now_add=True)
+
+'''
 class Address(models.Model):
     #id_addres = models.IntegerField(unique=True, null=False, blank=False)
     street_1 = models.CharField(max_length=255, blank=True, null=True)
@@ -72,30 +99,6 @@ class Lunchroom(models.Model):
     warehouse = models.ForeignKey('Warehouse', on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True)
 
-
-class Neighborhood(models.Model):
-    neighborhood = models.CharField(max_length=255)
-    last_update = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return str(self.neighborhood)
-
-
-class Person(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    telephone = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
-    dateOfBirth = models.DateField(default=datetime.date.today)
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
-    address = models.CharField(max_length=100, default='sin direccion')
-    number = models.IntegerField(blank=True, null=True)
-    is_candidate = models.BooleanField(default=True)
-
-    def __str__(self):
-        return str(self.first_name + ' ' + self.last_name)
-
-
 class Product(models.Model):
     description = models.CharField(max_length=255)
     brand = models.CharField(max_length=100)
@@ -111,13 +114,6 @@ class ProductDetail(models.Model):
 
 class Role(models.Model):
     description = models.CharField(max_length=50)
-    last_update = models.DateTimeField(auto_now_add=True)
-
-
-class Userpage(models.Model):
-    user_name = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True)
 
 
@@ -146,3 +142,4 @@ class Withdrawal(models.Model):
     volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True)
+'''
