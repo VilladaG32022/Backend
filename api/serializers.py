@@ -17,3 +17,8 @@ class DailyCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyCard
         fields = '__all__'
+
+class ListFoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListFood
+        fields = '__all__'
