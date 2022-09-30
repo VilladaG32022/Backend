@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 import datetime
 
@@ -33,8 +34,12 @@ class Person(models.Model):
 
 
 class DailyCard(models.Model):
+    title = models.CharField(max_length=100, null=True)
     img = models.CharField(max_length=1000)
     description = models.CharField(max_length=200)
+
+class ListFood(models.Model):
+    description = models.CharField(max_length=1000, default="No hay peticiones expecificas")
 
 '''
 class Userpage(models.Model):
