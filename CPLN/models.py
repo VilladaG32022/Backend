@@ -26,7 +26,6 @@ class Person(models.Model):
     dateOfBirth = models.DateField(default=datetime.date.today)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     address = models.CharField(max_length=100, default='sin direccion')
-    number = models.IntegerField(blank=True, null=True)
     is_candidate = models.BooleanField(default=True)
 
     def __str__(self):
