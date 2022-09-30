@@ -4,14 +4,6 @@ from CPLN.models import *
 from .serializers import *
 from django.http.response import JsonResponse
 
-
-
-'''@api_view(['GET'])
-def getUserPage(request):
-    users = Userpage.objects.all()
-    serializer = UserPageSerializer(users, many=True)
-    return Response(serializer.data)'''
-
 @api_view(['GET', 'POST'])
 def inscriptions(request):
     if request.method == 'POST':
