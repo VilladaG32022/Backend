@@ -9,5 +9,5 @@ urlpatterns = [
     path('Neighborhoods/', views.Neighborhoods),
     path('Notices/', views.notices),
     path('Notices/Get/', views.MyNotices),
-    path('ListFood/Get/', views.MyNotices),
+    path('ListFood/Get/', views.MyList),
 ]
