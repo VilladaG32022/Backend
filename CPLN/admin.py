@@ -7,7 +7,7 @@ from django.apps import apps
     
 my_models = apps.get_models()
 
-'''@admin.register(Person)
+@admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
     list_display = ("last_name", "first_name","dateOfBirth", "neighborhood","telephone","email","is_candidate")
     ordering = ("last_name",)
@@ -15,7 +15,7 @@ class PersonAdmin(admin.ModelAdmin):
     list_filter = ("neighborhood",)
     list_editable = ("is_candidate",)
     list_display_links = ("last_name",)
-    list_per_page = 8'''
+    list_per_page = 8
 
 # Register your models here.
 

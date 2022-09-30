@@ -12,7 +12,7 @@ def getUserPage(request):
     serializer = UserPageSerializer(users, many=True)
     return Response(serializer.data)'''
 
-'''@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST'])
 def inscriptions(request):
     if request.method == 'POST':
         serializeobj = PersonSerializer(data=request.data)
@@ -24,7 +24,7 @@ def inscriptions(request):
     else:
         users = Person.objects.all()
         serializer = PersonSerializer(users, many=True)
-        return Response(serializer.data)'''
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def MyNotices(request):
