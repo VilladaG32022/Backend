@@ -26,6 +26,20 @@ def inscriptions(request):
         serializer = PersonSerializer(users, many=True)
         return Response(serializer.data)
 
+@api_view(['GET', 'POST'])
+def Neighborhoods(request):
+    if request.method == 'POST':
+        serializeobj = Neighborhood(data=request.data)
+        if serializeobj.is_valid():
+            serializeobj.save()
+            return Response("Person created")
+        else:
+            return Response("Invalid Person")
+    else:
+        users = Neighborhood.objects.all()
+        serializer = Neighborhood(users, many=True)
+        return Response(serializer.data)
+
 @api_view(['GET'])
 def MyNotices(request):
     notices = DailyCard.objects.all()

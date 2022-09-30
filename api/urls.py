@@ -6,6 +6,7 @@ from api import views
 urlpatterns = [
     #path('UserPage/', views.getUserPage),
     path('Inscriptions/', views.inscriptions),
+    path('Neighborhoods/', views.Neighborhoods),
     path('Notices/', views.notices),
     path('Notices/Get/', views.MyNotices),
 ]
