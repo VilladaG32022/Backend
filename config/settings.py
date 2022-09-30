@@ -193,3 +193,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hlygbas6k',
+    'API_KEY': '841132183153953',
+    'API_SECRET': 'Y8mkCguMzEriI1-xNgA_6pVzc7U'
+}

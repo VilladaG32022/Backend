@@ -7,12 +7,12 @@ from CPLN.models import *
         model = Userpage
         fields = ('username', 'password')'''
 
-
+'''
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = '__all__'
-
+'''
 class DailyCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyCard
