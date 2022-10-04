@@ -16,3 +16,8 @@ class ListFoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = ListFood
         fields = '__all__'
+
+class NeighborhoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Neighborhood
+        fields = '__all__'

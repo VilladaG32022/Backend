@@ -29,7 +29,7 @@ def Neighborhoods(request):
             return Response("Invalid Person")
     else:
         users = Neighborhood.objects.all()
-        serializer = Neighborhood(users, many=True)
+        serializer = NeighborhoodSerializer(users, many=True)
         return Response(serializer.data)
 
 @api_view(['GET'])

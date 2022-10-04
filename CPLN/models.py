@@ -15,7 +15,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     telephone = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
     dateOfBirth = models.DateField(default=datetime.date.today)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     address = models.CharField(max_length=100, default='sin direccion')
@@ -34,6 +34,13 @@ class ListFood(models.Model):
     description = models.CharField(max_length=1000, default="No hay peticiones expecificas")
 
 '''
+
+class Volunteer(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    lunchroom = models.ForeignKey(Lunchroom, on_delete=models.CASCADE)
+    last_update = models.DateTimeField(auto_now_add=True)
+
 class Userpage(models.Model):
     user_name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
@@ -111,13 +118,6 @@ class ProductDetail(models.Model):
 
 class Role(models.Model):
     description = models.CharField(max_length=50)
-    last_update = models.DateTimeField(auto_now_add=True)
-
-
-class Volunteer(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    lunchroom = models.ForeignKey(Lunchroom, on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now_add=True)
 
 
