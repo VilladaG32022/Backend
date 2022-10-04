@@ -21,12 +21,12 @@ def inscriptions(request):
 @api_view(['GET', 'POST'])
 def Neighborhoods(request):
     if request.method == 'POST':
-        serializeobj = Neighborhood(data=request.data)
+        serializeobj = Neighborhood(data=request.data, many=True)
         if serializeobj.is_valid():
             serializeobj.save()
-            return Response("Person created")
+            return Response("Neighborhood created")
         else:
-            return Response("Invalid Person")
+            return Response("Invalid Neighborhood")
     else:
         users = Neighborhood.objects.all()
         serializer = NeighborhoodSerializer(users, many=True)
