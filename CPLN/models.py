@@ -1,11 +1,12 @@
 from email.policy import default
+from enum import unique
 from django.db import models
 import datetime
 
 # Create your models here.
 
 class Neighborhood(models.Model):
-    neighborhood = models.CharField(max_length=255)
+    neighborhood = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return str(self.neighborhood)
@@ -14,10 +15,9 @@ class Candidate(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     dateOfBirth = models.DateField(default=datetime.date.today)
-    email = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(max_length=50, unique=True)
     telephone = models.CharField(max_length=20)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
-    is_candidate = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.first_name + ' ' + self.last_name)
@@ -31,13 +31,13 @@ class New(models.Model):
     def __str__(self):
         return str(self.title + ' ' + self.description)
 
+'''
+
 class ListFood(models.Model):
     description = models.CharField(max_length=1000, default="No hay peticiones expecificas")
 
     def __str__(self):
         return str(self.description)
-
-'''
 
 class Volunteer(models.Model):
     Candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)

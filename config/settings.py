@@ -102,9 +102,9 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "ITS Villada",
     
-    "hide_apps": ["session", "auth"],
+    "hide_apps": ["session"],
 
-    "hide_models": ["CPLN.Neighborhood", "CPLN.ListFood"],
+    "hide_models": ["CPLN.Neighborhood"],
 
     "language_chooser": True,
 }

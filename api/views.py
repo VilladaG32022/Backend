@@ -70,8 +70,8 @@ def notices(self, request, pk):
         return JsonResponse(datos)
 
 
-@api_view(['GET'])
+'''@api_view(['GET'])
 def MyList(request):
     notices = ListFood.objects.all()
     serializer = ListFoodSerializer(notices, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data)'''

@@ -8,11 +8,9 @@ my_models = apps.get_models()
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name","dateOfBirth", "neighborhood","telephone","email","is_candidate")
+    list_display = ("last_name", "first_name", "neighborhood")
     ordering = ("last_name",)
-    search_fields = ("neighborhood","last_name")
     list_filter = ("neighborhood",)
-    list_editable = ("is_candidate",)
     list_display_links = ("last_name",)
     list_per_page = 8
 
