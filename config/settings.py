@@ -91,10 +91,10 @@ JAZZMIN_SETTINGS = {
     "site_brand": "CPLN Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "logo_color.png",
+    "site_logo": "logo_cuenco_oscuro.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "static/logo_color.png",
+    "login_logo": "static/logo_cuenco_oscuro.png",
 
     # Welcome text on the login screen
     "welcome_sign": "Bienvenido a la administracion de 'Cocinamos por los niños'",
@@ -102,7 +102,7 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "ITS Villada",
     
-    "hide_apps": ["contenttypes"],
+    "hide_apps": ["contenttypes","sessions"],
 
     "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission", "auth.Content_type", "auth.Session"],
 
