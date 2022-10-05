@@ -102,7 +102,7 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "ITS Villada",
     
-    "hide_apps": [django.apps],
+    "hide_apps": [],
 
     "hide_models": [],
 
