@@ -104,6 +104,8 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
 
     "hide_models": [],
+    
+    "language_chooser": True,
 }
 
 JAZZMIN_UI_TWEAKS = {
