@@ -28,7 +28,7 @@ class Candidate(models.Model):
 
 
 class New(models.Model):
-    title = models.CharField(max_length=100, null=True, verbose_name="Título")
+    title = models.CharField(max_length=100, default="Sin Título", verbose_name="Título")
     img = models.CharField(max_length=1000, verbose_name="Imágen")
     description = models.CharField(max_length=200, verbose_name="Descripción")
 

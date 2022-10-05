@@ -88,7 +88,7 @@ JAZZMIN_SETTINGS = {
     "site_header": "Cocinamos por los niños",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "CocinamosPorLosNiños",
+    "site_brand": "CPLN Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "logo_color.png",
@@ -104,7 +104,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": [],
 
-    "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission"],
+    "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission", "auth.Content_type", "auth.Session"],
 
     "language_chooser": True,
 }
