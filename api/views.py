@@ -7,15 +7,15 @@ from django.http.response import JsonResponse
 @api_view(['GET', 'POST'])
 def inscriptions(request):
     if request.method == 'POST':
-        serializeobj = PersonSerializer(data=request.data)
+        serializeobj = CandidateSerializer(data=request.data)
         if serializeobj.is_valid():
             serializeobj.save()
-            return Response("Person created")
+            return Response("Candidate created")
         else:
-            return Response("Invalid Person")
+            return Response("Invalid Candidate")
     else:
-        users = Person.objects.all()
-        serializer = PersonSerializer(users, many=True)
+        users = Candidate.objects.all()
+        serializer = CandidateSerializer(users, many=True)
         return Response(serializer.data)
 
 @api_view(['GET', 'POST'])
@@ -34,16 +34,16 @@ def Neighborhoods(request):
 
 @api_view(['GET'])
 def MyNotices(request):
-    notices = DailyCard.objects.all()
-    serializer = DailyCardSerializer(notices, many=True)
+    notices = News.objects.all()
+    serializer = NewsSerializer(notices, many=True)
     return Response(serializer.data)
     
 @api_view(['PUT', 'POST','DELETE'])
 def notices(self, request, pk):
     if request.method == 'PUT':
-        images = list(DailyCard.objects.filter(pk=pk).values())
+        images = list(News.objects.filter(pk=pk).values())
         if len(images) > 0:
-            serializeobj=DailyCardSerializer(images,data=request.data)
+            serializeobj=NewsSerializer(images,data=request.data)
             if serializeobj.is_valid():
                 serializeobj.save()
                 datos = {'message': "Success"}
@@ -54,14 +54,14 @@ def notices(self, request, pk):
         return JsonResponse(datos)
 
     elif request.method == 'POST':
-        newNotice = DailyCardSerializer(data=request.data)
+        newNotice = NewsSerializer(data=request.data)
         if newNotice.is_valid():
             newNotice.save()
             return Response("Notice created")
         return Response(newNotice.errors)
 
     elif request.method == 'DELETE':
-        myNotice = DailyCard.objects.filter(pk=pk).first()
+        myNotice = News.objects.filter(pk=pk).first()
         if myNotice != None:
             myNotice.delete()
             datos = {'message': "Success"}

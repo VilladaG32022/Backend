@@ -6,8 +6,8 @@ from django.apps import apps
     
 my_models = apps.get_models()
 
-@admin.register(Person)
-class PersonAdmin(admin.ModelAdmin):
+@admin.register(Candidate)
+class CandidateAdmin(admin.ModelAdmin):
     list_display = ("last_name", "first_name","dateOfBirth", "neighborhood","telephone","email","is_candidate")
     ordering = ("last_name",)
     search_fields = ("neighborhood","last_name")

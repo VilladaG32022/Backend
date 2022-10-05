@@ -2,14 +2,14 @@ from rest_framework import serializers
 from CPLN.models import *
 
 
-class PersonSerializer(serializers.ModelSerializer):
+class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Person
+        model = Candidate
         fields = '__all__'
 
-class DailyCardSerializer(serializers.ModelSerializer):
+class NewsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DailyCard
+        model = News
         fields = '__all__'
 
 class ListFoodSerializer(serializers.ModelSerializer):
