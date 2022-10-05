@@ -23,13 +23,19 @@ class Candidate(models.Model):
         return str(self.first_name + ' ' + self.last_name)
 
 
-class News(models.Model):
+class New(models.Model):
     title = models.CharField(max_length=100, null=True)
     img = models.CharField(max_length=1000)
     description = models.CharField(max_length=200)
 
+    def __str__(self):
+        return str(self.title + ' ' + self.description)
+
 class ListFood(models.Model):
     description = models.CharField(max_length=1000, default="No hay peticiones expecificas")
+
+    def __str__(self):
+        return str(self.description)
 
 '''
 

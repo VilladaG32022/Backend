@@ -104,7 +104,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": [],
 
-    "hide_models": [],
+    "hide_models": ["CPLN.Neighborhood", "CPLN.ListFood"],
 
     "language_chooser": True,
 }

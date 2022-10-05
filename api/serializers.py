@@ -7,9 +7,9 @@ class CandidateSerializer(serializers.ModelSerializer):
         model = Candidate
         fields = '__all__'
 
-class NewsSerializer(serializers.ModelSerializer):
+class NewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = News
+        model = New
         fields = '__all__'
 
 class ListFoodSerializer(serializers.ModelSerializer):
