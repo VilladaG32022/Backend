@@ -17,7 +17,7 @@ class CandidateAdmin(admin.ModelAdmin):
 @admin.register(New)
 class NewAdmin(admin.ModelAdmin):
     list_display = ("title", "description")
-    list_filter = ("neighborhood",)
+    list_filter = ("title",)
     list_per_page = 5
 
 # Register your models here.
