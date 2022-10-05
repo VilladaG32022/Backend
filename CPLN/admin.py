@@ -14,6 +14,12 @@ class CandidateAdmin(admin.ModelAdmin):
     list_display_links = ("last_name",)
     list_per_page = 8
 
+@admin.register(New)
+class NewAdmin(admin.ModelAdmin):
+    list_display = ("title", "description")
+    list_filter = ("neighborhood",)
+    list_per_page = 5
+
 # Register your models here.
 
 for model in my_models:
