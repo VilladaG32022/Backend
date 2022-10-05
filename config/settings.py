@@ -91,10 +91,10 @@ JAZZMIN_SETTINGS = {
     "site_brand": "CPLN Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "logo_cuenco_oscuro.png",
+    "site_logo": "logo_cuenco_blanco.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "static/logo_cuenco_oscuro.png",
+    "login_logo": "static/logo_cuenco_blanco.png",
 
     # Welcome text on the login screen
     "welcome_sign": "Bienvenido a la administracion de 'Cocinamos por los niños'",
