@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-from django.conf.global_settings import LANGUAGES as DJANGO_LANGUAGES
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,7 +104,7 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
 
     "hide_models": [],
-    
+
     "language_chooser": True,
 }
 
@@ -180,7 +180,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-LANGUAGES = DJANGO_LANGUAGES
+LANGUAGES = [
+    ('es', _('Spanish')),
+    ('en', _('English')),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
