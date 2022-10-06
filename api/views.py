@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from CPLN.models import *
 from .serializers import *
 from django.http.response import JsonResponse
+from django.contrib.admin.models import LogEntry
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):
@@ -68,3 +69,12 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
+
+@api_view(['DELETE'])
+def logEntries(request):
+    if request.method == 'DELETE':
+        LogEntry.objects.all().delete()
+    else:
+        log = LogEntry.objects.all()
+        serializer = LogEntrySerializer(log, many=True)
+        return Response(serializer.data)        

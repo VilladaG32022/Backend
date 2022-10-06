@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from CPLN.models import *
-
+from django.contrib.admin.models import LogEntry
 
 class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,4 +15,9 @@ class NewSerializer(serializers.ModelSerializer):
 class NeighborhoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Neighborhood
+        fields = '__all__'
+
+class LogEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogEntry
         fields = '__all__'
