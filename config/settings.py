@@ -93,7 +93,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": ["contenttypes","sessions"],
 
-    "hide_models": ["CPLN.Neighborhood"],
+    "hide_models": ["auth.Permission"],
 
     "icons": {
         "dashboard":"fa-house",
