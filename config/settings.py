@@ -110,7 +110,8 @@ CORS_ORIGIN_WHITELIST =[
     'https://localhost:3000',
     'http://localhost:3000',
     'https://deploy-front-oaruzfir0-villadag32022.vercel.app/',
-    'https://deploy-front-kbstu5ehw-villadag32022.vercel.app/'
+    'https://deploy-front-kbstu5ehw-villadag32022.vercel.app/',
+    'https://deploy-front-beta.vercel.app/'
 ]
 
 # Database
