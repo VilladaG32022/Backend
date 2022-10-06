@@ -91,7 +91,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "CPLN Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "android-chrome-192x192.png",
+    "site_logo": "favicon-32x32.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": "static/logo_cuenco_blanco.png",
@@ -104,7 +104,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": ["contenttypes","sessions"],
 
-    "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission", "auth.Content_type", "auth.Session"],
+    "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission"],
 
     "language_chooser": True,
 }

@@ -68,10 +68,3 @@ def notices(self, request, pk):
         else:
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
-
-
-'''@api_view(['GET'])
-def MyList(request):
-    notices = ListFood.objects.all()
-    serializer = ListFoodSerializer(notices, many=True)
-    return Response(serializer.data)'''
