@@ -20,11 +20,6 @@ class NewAdmin(admin.ModelAdmin):
     list_filter = ("title",)
     list_per_page = 5
 
-@admin.register(Neighborhood)
-class NeighborhoodAdmin(admin.ModelAdmin):
-    list_display = ("neighborhood")
-    ordering = ("neighborhood")
-
 # Register your models here.
 
 for model in my_models:
