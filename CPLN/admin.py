@@ -21,7 +21,7 @@ class NewAdmin(admin.ModelAdmin):
     list_per_page = 5
 
 @admin.register(Neighborhood)
-class CandidateAdmin(admin.ModelAdmin):
+class NeighborhoodAdmin(admin.ModelAdmin):
     list_display = ("neighborhood")
     ordering = ("neighborhood")
 
