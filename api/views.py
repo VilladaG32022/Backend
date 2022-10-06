@@ -70,10 +70,11 @@ def notices(self, request, pk):
             datos = {'message': "Notice not found..."}
         return JsonResponse(datos)
 
-@api_view(['DELETE'])
+@api_view(['DELETE','GET'])
 def logEntries(request):
     if request.method == 'DELETE':
         LogEntry.objects.all().delete()
+        return Response("Log entries rebooted")
     else:
         log = LogEntry.objects.all()
         serializer = LogEntrySerializer(log, many=True)
