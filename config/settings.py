@@ -95,6 +95,10 @@ JAZZMIN_SETTINGS = {
 
     "hide_models": ["CPLN.Neighborhood", "auth.Group", "auth.Permission"],
 
+    "icons": {
+        "dashboard":"fa-solid fa-house",
+    },
+
     "language_chooser": True,
 }
 
