@@ -24,6 +24,7 @@ class Candidate(models.Model):
         ('An', 'Analizando'),
         ('Ac', 'Aceptado'),
     )
+    status = models.CharField(max_length=2, choices=STATUS, default='P', verbose_name="Estado")
 
     class Meta:
         verbose_name = "Candidato"
