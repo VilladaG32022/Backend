@@ -8,7 +8,7 @@ my_models = apps.get_models()
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "neighborhood")
+    list_display = ("last_name", "first_name", "neighborhood", "STATUS")
     ordering = ("last_name",)
     list_filter = ("neighborhood",)
     list_display_links = ("last_name",)
