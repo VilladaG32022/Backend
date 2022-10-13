@@ -15,6 +15,11 @@ class CandidateAdmin(admin.ModelAdmin):
     list_editable = ("status",)
     list_per_page = 10
 
+    actions = ['add_volunteer']
+
+    def add_volunteer(self):
+        pass
+
 @admin.register(New)
 class NewAdmin(admin.ModelAdmin):
     list_display = ("title", "description")

@@ -7,6 +7,11 @@ class CandidateSerializer(serializers.ModelSerializer):
         model = Candidate
         fields = '__all__'
 
+class VolunteerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Volunteer
+        fields = '__all__'
+
 class NewSerializer(serializers.ModelSerializer):
     class Meta:
         model = New
