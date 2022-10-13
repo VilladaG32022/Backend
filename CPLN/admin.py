@@ -12,7 +12,8 @@ class CandidateAdmin(admin.ModelAdmin):
     ordering = ("last_name",)
     list_filter = ("neighborhood",)
     list_display_links = ("last_name",)
-    list_per_page = 8
+    list_editable = ("status",)
+    list_per_page = 10
 
 @admin.register(New)
 class NewAdmin(admin.ModelAdmin):

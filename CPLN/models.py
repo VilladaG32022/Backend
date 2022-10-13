@@ -44,3 +44,13 @@ class New(models.Model):
 
     def __str__(self):
         return str(self.title + ' ' + self.description)
+
+class ListFood(models.Model):
+    description = models.TextField(default="No hay peticiones expecíficas", verbose_name="Descripción")
+
+    class Meta:
+        verbose_name = "Lista de Comida"
+        verbose_name_plural = "Lista de Comida"
+
+    def __str__(self):
+        return str(self.description)
