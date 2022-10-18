@@ -5,8 +5,7 @@ import datetime
 from django.core.validators import MinLengthValidator
 from django.core.validators import RegexValidator
 
-
-alphabetical = RegexValidator(r'^[a-zA-Z]*$', 'Solamente está permitido usar caracteres alfabéticos.')
+alphabetical = RegexValidator(r'^[a-zA-Z ]*$', 'Solamente está permitido usar caracteres alfabéticos.')
 # Create your models here.
 
 class Neighborhood(models.Model):
