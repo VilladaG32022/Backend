@@ -5,17 +5,24 @@ from .serializers import *
 from django.http.response import JsonResponse
 from django.contrib.admin.models import LogEntry
 from rest_framework import status
+from datetime import date
 
 @api_view(['GET', 'POST'])
-def inscriptions(request):
+def inscriptions(self, request):
     if request.method == 'POST':
         serializeobj = CandidateSerializer(data=request.data)
         if serializeobj.is_valid():
-            serializeobj.save()
-            content = {'Candidate created': 'OK'}
-            return Response(content, status=status.HTTP_200_OK)
+            dob = self.request.DateOfBirth
+            age = (date.today() - dob).days / 365
+            if age < 2:
+                content = {'Invalid Date Of BirthBAD_REQUEST': 'Invalid Date Of Birth'}
+                return Response(content, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                serializeobj.save()
+                content = {'Candidate created OK': 'Candidate created'}
+                return Response(content, status=status.HTTP_200_OK)
         else:
-            content = {'Invalid Candidate': 'BAD_REQUEST'}
+            content = {'BAD_REQUEST': 'Invalid Candidate'}
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
     else:
         users = Candidate.objects.all()
