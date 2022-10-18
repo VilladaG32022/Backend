@@ -4,6 +4,7 @@ from CPLN.models import *
 from .serializers import *
 from django.http.response import JsonResponse
 from django.contrib.admin.models import LogEntry
+from rest_framework import status
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):
@@ -11,9 +12,11 @@ def inscriptions(request):
         serializeobj = CandidateSerializer(data=request.data)
         if serializeobj.is_valid():
             serializeobj.save()
-            return Response("Candidate created")
+            content = {'Candidate created': 'OK'}
+            return Response(content, status=status.HTTP_200_OK)
         else:
-            return Response("Invalid Candidate")
+            content = {'Invalid Candidate': 'BAD_REQUEST'}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
     else:
         users = Candidate.objects.all()
         serializer = CandidateSerializer(users, many=True)
