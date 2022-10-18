@@ -6,7 +6,7 @@ from django.core.validators import MinLengthValidator
 from django.core.validators import RegexValidator
 
 
-alphanumeric = RegexValidator(r'^[a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
+alphabetical = RegexValidator(r'^[a-zA-Z]*$', 'Solamente está permitido usar caracteres alfabéticos.')
 # Create your models here.
 
 class Neighborhood(models.Model):
@@ -37,8 +37,8 @@ class Candidate(models.Model):
         return str(self.first_name + ' ' + self.last_name)
 
 class Volunteer(models.Model):
-    first_name = models.CharField(max_length=100, validators=[alphanumeric, MinLengthValidator(3)], verbose_name="Nombre")
-    last_name = models.CharField(max_length=100, validators=[alphanumeric, MinLengthValidator(3)], verbose_name="Apellido")
+    first_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Nombre")
+    last_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Apellido")
     dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
     email = models.EmailField(max_length=50, unique=True)
     telephone = models.CharField(max_length=20, verbose_name="Teléfono")
