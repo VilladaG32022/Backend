@@ -15,8 +15,8 @@ class Neighborhood(models.Model):
         return str(self.neighborhood)
 
 class Candidate(models.Model):
-    first_name = models.CharField(max_length=100, verbose_name="Nombre")
-    last_name = models.CharField(max_length=100, verbose_name="Apellido")
+    first_name = models.CharField(validators=[alphabetical, MinLengthValidator(3)], max_length=100, verbose_name="Nombre")
+    last_name = models.CharField(validators=[alphabetical, MinLengthValidator(3)], max_length=100, verbose_name="Apellido")
     dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
     email = models.EmailField(max_length=50, unique=True)
     telephone = models.CharField(max_length=20, verbose_name="Teléfono")
