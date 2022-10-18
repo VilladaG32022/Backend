@@ -8,7 +8,7 @@ from rest_framework import status
 from datetime import date
 
 @api_view(['GET', 'POST'])
-def inscriptions(self, request):
+def inscriptions(request):
     if request.method == 'POST':
         serializeobj = CandidateSerializer(data=request.data)
         if serializeobj.is_valid():
