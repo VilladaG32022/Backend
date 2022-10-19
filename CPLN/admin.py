@@ -24,9 +24,6 @@ class CandidateAdmin(admin.ModelAdmin):
             if serializeobj.is_valid():
                 serializeobj.save()
                 candidate.delete()
-                print("Se agregó correctamente")
-            else:
-                print("Ni idea que pasó")
 
 #modeladmin
 
