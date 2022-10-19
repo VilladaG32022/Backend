@@ -25,6 +25,7 @@ def add_volunteer(modeladmin, request, queryset):
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
+    actions = [add_volunteer]
     list_display = ("last_name", "first_name", "neighborhood", "status")
     ordering = ("last_name",)
     list_filter = ("neighborhood",)
@@ -32,7 +33,6 @@ class CandidateAdmin(admin.ModelAdmin):
     list_editable = ("status",)
     list_per_page = 10
 
-    actions = ['add_volunteer']
 
 #modeladmin
 
