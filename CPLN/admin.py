@@ -22,7 +22,7 @@ class CandidateAdmin(admin.ModelAdmin):
         for candidate in queryset:
             serializeobj = VolunteerSerializer(candidate)
             if serializeobj.is_valid():
-                serializeobj.save()
+                VolunteerSerializer(candidate).save()
                 candidate.delete()
 
 #modeladmin
