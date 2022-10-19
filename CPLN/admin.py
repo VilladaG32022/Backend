@@ -20,7 +20,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
     def add_volunteer(modeladmin, request, queryset):
         for candidate in queryset:
-            serializeobj = VolunteerSerializer(candidate)
+            serializeobj = VolunteerSerializer(data=candidate)
             if serializeobj.is_valid():
                 VolunteerSerializer(candidate).save()
                 candidate.delete()
