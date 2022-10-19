@@ -6,8 +6,22 @@ from django.apps import apps
 from api.serializers import CandidateSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
     
 my_models = apps.get_models()
+
+@api_view(['POST'])
+def add_volunteer(modeladmin, request, queryset):
+    for candidate in queryset:
+        serializeobj = CandidateSerializer(data=candidate, many=True)
+        if serializeobj.is_valid():
+            serializeobj.save()
+            candidate.delete()
+            content = {'Candidate created OK': 'Candidate created'}
+            return Response(content, status=status.HTTP_200_OK)
+        else:
+            content = {'BAD_REQUEST': 'Invalid Candidate'}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
@@ -21,18 +35,7 @@ class CandidateAdmin(admin.ModelAdmin):
     actions = ['add_volunteer']
 
 #modeladmin
-    def add_volunteer(self, request, queryset):
-        for candidate in queryset:
-            serializeobj = CandidateSerializer(data=candidate, many=True)
-            if serializeobj.is_valid():
-                serializeobj.save()
-                candidate.delete()
-                content = {'Candidate created OK': 'Candidate created'}
-                return Response(content, status=status.HTTP_200_OK)
-            else:
-                content = {'BAD_REQUEST': 'Invalid Candidate'}
-                return Response(content, status=status.HTTP_400_BAD_REQUEST)
-        pass
+
 
 @admin.register(New)
 class NewAdmin(admin.ModelAdmin):
