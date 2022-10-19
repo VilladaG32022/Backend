@@ -22,13 +22,13 @@ class Candidate(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     telephone = models.CharField(validators=[numeric, MinLengthValidator(8)], max_length=20, verbose_name="Teléfono")
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, verbose_name="Barrio")
-    STATUS = (
+    '''STATUS = (
         ('P', 'Postulado'),
         ('R', 'Rechazado'),
         ('An', 'Analizando'),
         ('Ac', 'Aceptado'),
     )
-    status = models.CharField(max_length=2, choices=STATUS, default='P', verbose_name="Estado")
+    status = models.CharField(max_length=2, choices=STATUS, default='P', verbose_name="Estado")'''
 
     class Meta:
         verbose_name = "Candidato"
