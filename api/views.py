@@ -32,7 +32,7 @@ def inscriptions(request):
 @api_view(['GET', 'POST'])
 def Neighborhoods(request):
     if request.method == 'POST':
-        serializeobj = NeighborhoodSerializer(data=request.data, many=True)
+        serializeobj = NeighborhoodSerializer(data=request.data)
         if serializeobj.is_valid():
             serializeobj.save()
             return Response("Neighborhood created")
