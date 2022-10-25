@@ -91,9 +91,9 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "ITS Villada",
     
-    "hide_apps": ["contenttypes","sessions","logentry"],
-
-    "hide_models": ["auth.Permission", "CPLN.Neighborhood", "auth.Group"],
+    "hide_apps": ["sessions","logentry"],
+#"auth.Permission", "contenttypes",
+    "hide_models": ["CPLN.Neighborhood", "auth.Group"],
 
     "icons": {
         "dashboard":"fa-house",
