@@ -71,3 +71,20 @@ class ListFood(models.Model):
 
     def __str__(self):
         return str(self.description)
+
+'''class Ingredient(models.Model):
+    food = models.CharField(max_length=100, default="Agregar nombre", verbose_name="Alimento")
+    quantity = models.FloatField(verbose_name="Cantidad")
+    MEASUREMENT = (
+        ('Gr', 'Gramos'),
+        ('Ml', 'Mililitros'),
+        ('U', 'Unidades'),
+    )
+    measurement = models.CharField(max_length=2, choices=MEASUREMENT, default='Gr', verbose_name="Unidad de medida")
+
+    class Meta:
+        verbose_name = "Ingrediente"
+        verbose_name_plural = "Ingredientes"
+
+    def __str__(self):
+        return str(self.food + ' ' + self.quantity)'''
