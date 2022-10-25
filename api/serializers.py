@@ -26,3 +26,8 @@ class LogEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = LogEntry
         fields = '__all__'
+
+class ListFoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListFood
+        fields = '__all__'

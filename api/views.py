@@ -88,4 +88,10 @@ def logEntries(request):
     else:
         log = LogEntry.objects.all()
         serializer = LogEntrySerializer(log, many=True)
-        return Response(serializer.data)        
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def MyList(request):
+    notices = ListFood.objects.all()
+    serializer = ListFoodSerializer(notices, many=True)
+    return Response(serializer.data)

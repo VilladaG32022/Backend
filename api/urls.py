@@ -8,4 +8,5 @@ urlpatterns = [
     path('Notices/', views.notices),
     path('Notices/Get/', views.MyNotices),
     path('logEntries/', views.logEntries),
+    path('ListFood/Get/', views.MyList),
 ]
