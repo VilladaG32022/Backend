@@ -36,6 +36,21 @@ class NewAdmin(admin.ModelAdmin):
 
 # Register your models here.
 
+class IngredientInline(admin.StackedInline):
+    extra = 1
+    model = Ingredient
+from django.utils.html import format_html
+@admin.register(Lunch)
+class LunchAdmin(admin.ModelAdmin):
+    def action(self, obj):
+        if not obj:
+            return
+        return format_html(f'<a href="/calc-lunch/{obj.id}">Calcular menu</a>')
+    inlines =  (IngredientInline, )
+    list_display = ('description', 'action')
+
+
+
 for model in my_models:
     try:
         admin.site.register(model)
