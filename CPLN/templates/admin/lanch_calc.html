@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_list jazzmin %}
+
+
+
+{% block extrahead %}
+    {{ block.super }}
+    {{ media.js }}
+{% endblock %}
+
+
+{% block content_title %} Calcular Menu {% endblock %}
+
+{% block coltype %}flex{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="col-12">
+
+        <form>
+                <input type="number" name="qty" value="{{qty}}">
+                <button>Enviar</button>
+        </form>
+
+            {{lunch.description}}
+            <br class="clear"/>
+            {% for item in lunch.ingredients.all  %}
+                   {{item}} : {{item.quantity}} * {{qty}}
+            <br>
+            {% endfor %}
+
+        <br class="clear"/>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    {{  block.super }}
+
+{% endblock %}

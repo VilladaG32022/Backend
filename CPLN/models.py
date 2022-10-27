@@ -170,7 +170,7 @@ class Lunch(models.Model):
 
 class Ingredient(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE, verbose_name="Almuerzo")
+    id_lunch = models.ForeignKey(Lunch, related_name = 'ingredients', on_delete=models.CASCADE, verbose_name="Almuerzo")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
@@ -178,7 +178,7 @@ class Ingredient(models.Model):
         verbose_name_plural = "Ingredientes"
 
     def __str__(self):
-        return str(self.id_product + ' ' + self.quantity)
+        return f'{self.id_product.description}'
 
 class Family(models.Model):
     name = models.CharField(max_length=40, null=False, verbose_name="Nombre")
