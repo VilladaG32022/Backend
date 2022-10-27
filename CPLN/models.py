@@ -15,28 +15,49 @@ class Neighborhood(models.Model):
     def __str__(self):
         return str(self.neighborhood)
 
+class CandidateManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().exclude(status=Candidate.ACEPTED)
+
 class Candidate(models.Model):
+    POSTULATED = 'P'
+    REJECTED = 'R'
+    ANALISING = 'An'
+    ACEPTED = 'Ac'
+
     first_name = models.CharField(validators=[alphabetical, MinLengthValidator(3)], max_length=100, verbose_name="Nombre")
     last_name = models.CharField(validators=[alphabetical, MinLengthValidator(3)], max_length=100, verbose_name="Apellido")
     dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
     email = models.EmailField(max_length=50, unique=True)
     telephone = models.CharField(validators=[numeric, MinLengthValidator(8)], max_length=20, verbose_name="Teléfono")
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, verbose_name="Barrio")
-    '''STATUS = (
-        ('P', 'Postulado'),
-        ('R', 'Rechazado'),
-        ('An', 'Analizando'),
-        ('Ac', 'Aceptado'),
+    STATUS = (
+        (POSTULATED, 'Postulado'),
+        (REJECTED, 'Rechazado'),
+        (ANALISING, 'Analizando'),
+        (ACEPTED, 'Aceptado'),
     )
-    status = models.CharField(max_length=2, choices=STATUS, default='P', verbose_name="Estado")'''
+    status = models.CharField(max_length=2, choices=STATUS, default='P', verbose_name="Estado")
 
+
+    objects = CandidateManager()
     class Meta:
         verbose_name = "Candidato"
         verbose_name_plural = "Candidatos"
     def __str__(self):
         return str(self.first_name + ' ' + self.last_name)
 
-class Volunteer(models.Model):
+class VolunteerManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Candidate.ACEPTED)
+
+
+class Volunteer(Candidate):
+    objects = VolunteerManager()
+    class Meta:
+        proxy = True
+
+'''class Volunteer(models.Model):
     first_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Nombre")
     last_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Apellido")
     dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
@@ -48,7 +69,7 @@ class Volunteer(models.Model):
         verbose_name_plural = "Voluntarios"
 
     def __str__(self):
-        return str(self.first_name + ' ' + self.last_name)
+        return str(self.first_name + ' ' + self.last_name)'''
 
 class New(models.Model):
     title = models.CharField(max_length=100, default="Sin Título", verbose_name="Título")
