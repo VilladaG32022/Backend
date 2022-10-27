@@ -50,12 +50,35 @@ class Candidate(models.Model):
 class VolunteerManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=Candidate.ACEPTED)
+<<<<<<< HEAD
 
 
 class Volunteer(Candidate):
     objects = VolunteerManager()
     class Meta:
         proxy = True
+=======
+
+
+class Volunteer(Candidate):
+    objects = VolunteerManager()
+    class Meta:
+        proxy = True
+
+'''class Volunteer(models.Model):
+    first_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Nombre")
+    last_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Apellido")
+    dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
+    email = models.EmailField(max_length=50, unique=True)
+    telephone = models.CharField(validators=[numeric, MinLengthValidator(8)], max_length=20, verbose_name="Teléfono")
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, verbose_name="Barrio")    
+    class Meta:
+        verbose_name = "Voluntario"
+        verbose_name_plural = "Voluntarios"
+
+    def __str__(self):
+        return str(self.first_name + ' ' + self.last_name)'''
+>>>>>>> 6fae54c11d0d08cf4c8a6c0ef0373de30494256b
 
 class New(models.Model):
     title = models.CharField(max_length=100, default="Sin Título", verbose_name="Título")
@@ -79,7 +102,11 @@ class ListFood(models.Model):
     def __str__(self):
         return str(self.description)
 
+<<<<<<< HEAD
 '''class Origin(models.Model):
+=======
+class Origin(models.Model):
+>>>>>>> 6fae54c11d0d08cf4c8a6c0ef0373de30494256b
     description = models.CharField(max_length=40, default="Sin orígen", verbose_name="Descripción")
 
     class Meta:
@@ -233,4 +260,8 @@ class WithdrawalDetail(models.Model):
         verbose_name_plural = "Detalle de los retiros"
 
     def __str__(self):
+<<<<<<< HEAD
         return str(self.id_withdrawal)'''
+=======
+        return str(self.id_withdrawal)
+>>>>>>> 6fae54c11d0d08cf4c8a6c0ef0373de30494256b
