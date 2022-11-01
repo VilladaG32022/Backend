@@ -33,7 +33,7 @@ class LunchAdmin(admin.ModelAdmin):
     def action(self, obj):
         if not obj:
             return
-        return format_html(f'<a href="https://deploy-hernan.herokuapp.com/calc-lunch/{obj.id}"> <button>Calcular menu</button></a>')
+        return format_html(f'<a href="/calc-lunch/{obj.id}"> <button>Calcular menu</button></a>')
     inlines =  (IngredientInline, )
     list_display = ('description', 'action')
 
