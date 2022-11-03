@@ -33,11 +33,10 @@ class LunchAdmin(admin.ModelAdmin):
     def action(self, obj):
         if not obj:
             return
-        return format_html(f'<a> <button href="/calc-lunch/{obj.id}">Calcular menu</button></a>')
+        return format_html(f'<a href="/calc-lunch/{obj.id}">Calcular menu</a>')
     inlines =  (IngredientInline, )
     list_display = ('description', 'action')
-
-#<button type="button" onclick="calc-lunch/{obj.id}">Calcular menu</button>
+    
 # Register your models here.
 
 

@@ -5,7 +5,6 @@ from .serializers import *
 from django.http.response import JsonResponse
 from django.contrib.admin.models import LogEntry
 from rest_framework import status
-from datetime import date
 
 @api_view(['GET', 'POST'])
 def inscriptions(request):
@@ -22,7 +21,7 @@ def inscriptions(request):
             content = {'Candidate created OK': 'Candidate created'}
             return Response(content, status=status.HTTP_200_OK)
         else:
-            content = {'BAD_REQUEST': 'Invalid Candidate'}
+            content = serializeobj.errors
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
     else:
         users = Candidate.objects.all()
