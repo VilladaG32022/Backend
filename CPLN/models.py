@@ -133,14 +133,14 @@ class Product(models.Model):
 
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
     id_product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, verbose_name="Tipo de producto")
-    UNIT_TYPE = (
+    UNITTYPE = (
         (KILOGRAMS, 'Kilogramos'),
         (GRAMS, 'Gramos'),
         (MILLILITERS, 'Mililitros'),
         (LITERS, 'Litros'),
         (UNITS, 'Unidades'),
     )
-    unit_type = models.CharField(max_length=2, choices=UNIT_TYPE, default='u', verbose_name="Tipo de unidad")
+    unit_type = models.CharField(max_length=2, choices=UNITTYPE, default='u', verbose_name="Tipo de unidad")
 
     class Meta:
         verbose_name = "Producto"
