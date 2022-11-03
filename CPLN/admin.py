@@ -28,6 +28,14 @@ class IngredientInline(admin.StackedInline):
     extra = 1
     model = Ingredient
 
+class FamilyInline(admin.StackedInline):
+    extra = 1
+    model = Family
+
+class DonationInline(admin.StackedInline):
+    extra = 1
+    model = Donation
+
 @admin.register(Lunch)
 class LunchAdmin(admin.ModelAdmin):
     def action(self, obj):
@@ -36,7 +44,7 @@ class LunchAdmin(admin.ModelAdmin):
         return format_html(f'<a href="/calc-lunch/{obj.id}">Calcular menu</a>')
     inlines =  (IngredientInline, )
     list_display = ('description', 'action')
-    
+
 # Register your models here.
 
 
