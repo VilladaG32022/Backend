@@ -28,13 +28,15 @@ class IngredientInline(admin.StackedInline):
     extra = 1
     model = Ingredient
 
-class FamilyInline(admin.StackedInline):
+class FamilyVolunteerInline(admin.StackedInline):
     extra = 1
-    model = Family
+    model = FamilyVolunteer
 
-class DonationInline(admin.StackedInline):
-    extra = 1
-    model = Donation
+
+@admin.register(Family)
+class FamilyAdmin(admin.ModelAdmin):
+    inlines =  (FamilyVolunteerInline, )
+    list_display = ('name',)
 
 @admin.register(Lunch)
 class LunchAdmin(admin.ModelAdmin):

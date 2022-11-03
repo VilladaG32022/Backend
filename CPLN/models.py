@@ -222,8 +222,8 @@ class FamilyVolunteer(models.Model):
     id_role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Rol")
 
     class Meta:
-        verbose_name = "Inventorio"
-        verbose_name_plural = "Inventorios"
+        verbose_name = "Integrante"
+        verbose_name_plural = "Integrantes"
 
     def __str__(self):
         return str(self.id_family + ' ' + self.id_volunteer)
