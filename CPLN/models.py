@@ -195,15 +195,15 @@ class Family(models.Model):
 
 class Inventory(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, verbose_name="Familia")
+    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, verbose_name="Familia")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
-        verbose_name = "Inventorio"
-        verbose_name_plural = "Inventorios"
+        verbose_name = "Inventario"
+        verbose_name_plural = "Inventarios"
 
     def __str__(self):
-        return str(self.id_product + ' ' + self.quantity)
+        return f'{self.id_product.description, self.quantity}'
 
 class Role(models.Model):
     role = models.CharField(max_length=40, null=False, verbose_name="Rol")

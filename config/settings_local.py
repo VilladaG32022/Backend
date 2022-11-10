@@ -93,7 +93,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": ["contenttypes","sessions","admin"],
 
-    "hide_models": ["CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.ProductDonation", "CPLN.Inventory", "CPLN.Withdrawal", "CPLN.WithdrawalDetail", "CPLN.FamilyVolunteer", "CPLN.Ingredient"],
+    "hide_models": ["CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.ProductDonation", "CPLN.Withdrawal", "CPLN.WithdrawalDetail", "CPLN.FamilyVolunteer", "CPLN.Ingredient", "CPLN.ProductType"],
 
     "icons": {
         "dashboard":"fa-house",
@@ -103,7 +103,8 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "darkly",
+    "theme": "pulse",
+    "dark_mode_theme": "darkly",
 }
 
 #,"auth.Permission", "auth.Group" "CPLN.Neighborhood", "CPLN.Donation", "CPLN.Family", "CPLN.Role",

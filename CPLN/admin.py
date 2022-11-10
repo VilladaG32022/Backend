@@ -32,10 +32,13 @@ class FamilyVolunteerInline(admin.StackedInline):
     extra = 1
     model = FamilyVolunteer
 
+class InventoryInline(admin.StackedInline):
+    extra = 1
+    model = Inventory
 
 @admin.register(Family)
 class FamilyAdmin(admin.ModelAdmin):
-    inlines =  (FamilyVolunteerInline, )
+    inlines =  (FamilyVolunteerInline, InventoryInline)
     list_display = ('name',)
 
 @admin.register(Lunch)
