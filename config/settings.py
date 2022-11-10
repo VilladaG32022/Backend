@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-y#4vu9x@apvqyv7su$zy@2kejgzjfpn+x^1-6vlh)=us72@f%=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'deploy-hernan.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -93,7 +93,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": ["contenttypes","sessions","admin"],
 
-    "hide_models": ["CPLN.Neighborhood", "CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.Donation", "CPLN.ProductDonation", "CPLN.Family", "CPLN.Inventory", "CPLN.Role", "CPLN.FamilyVolunteer", "CPLN.Withdrawal", "CPLN.WithdrawalDetail","auth.Permission", "auth.Group"],
+    "hide_models": ["CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.ProductDonation", "CPLN.Withdrawal", "CPLN.WithdrawalDetail", "CPLN.FamilyVolunteer", "CPLN.Ingredient", "CPLN.ProductType"],
 
     "icons": {
         "dashboard":"fa-house",
@@ -103,28 +103,18 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "darkly",
+    "theme": "pulse",
+    "dark_mode_theme": "darkly",
 }
 
-CORS_ORIGIN_WHITELIST = [
-    'https://localhost:3000',
-    'http://localhost:3000',
-    'https://deploy-front-oaruzfir0-villadag32022.vercel.app',
-    'https://deploy-front-kbstu5ehw-villadag32022.vercel.app',
-    'https://deploy-front-beta.vercel.app'
-]
-
+#,"auth.Permission", "auth.Group" "CPLN.Neighborhood", "CPLN.Donation", "CPLN.Family", "CPLN.Role",
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9a4rvtpmg98jl',
-        'USER': 'npepwancfjngkw',
-        'PASSWORD': '138fddf18ba988034dfa0beab17219ee1d3a6cd0c15fad727afb3b0a732bb03b',
-        'HOST': 'ec2-52-200-5-135.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -137,12 +127,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
+    
 }
 
 
@@ -196,7 +181,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # Default primary key field type
@@ -204,8 +189,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hlygbas6k',
-    'API_KEY': '841132183153953',
-    'API_SECRET': 'Y8mkCguMzEriI1-xNgA_6pVzc7U'
-}
