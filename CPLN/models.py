@@ -56,20 +56,8 @@ class Volunteer(Candidate):
     objects = VolunteerManager()
     class Meta:
         proxy = True
-
-'''class Volunteer(models.Model):
-    first_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Nombre")
-    last_name = models.CharField(max_length=100, validators=[alphabetical, MinLengthValidator(3)], verbose_name="Apellido")
-    dateOfBirth = models.DateField(default=datetime.date.today, verbose_name="Fecha Nacimiento")
-    email = models.EmailField(max_length=50, unique=True)
-    telephone = models.CharField(validators=[numeric, MinLengthValidator(8)], max_length=20, verbose_name="Teléfono")
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, verbose_name="Barrio")    
-    class Meta:
         verbose_name = "Voluntario"
         verbose_name_plural = "Voluntarios"
-
-    def __str__(self):
-        return str(self.first_name + ' ' + self.last_name)'''
 
 class New(models.Model):
     title = models.CharField(max_length=100, default="Sin Título", verbose_name="Título")
@@ -92,6 +80,7 @@ class ListFood(models.Model):
 
     def __str__(self):
         return str(self.description)
+
 
 class Origin(models.Model):
     description = models.CharField(max_length=40, default="Sin orígen", verbose_name="Descripción")
@@ -136,8 +125,22 @@ class ProductType(models.Model):
         return str(self.description)
 
 class Product(models.Model):
+    KILOGRAMS = 'kg'
+    GRAMS = 'gr'
+    MILLILITERS = 'mm'
+    LITERS = 'lt'
+    UNITS = 'u'
+
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
     id_product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, verbose_name="Tipo de producto")
+    UNITTYPE = (
+        (KILOGRAMS, 'Kilogramos'),
+        (GRAMS, 'Gramos'),
+        (MILLILITERS, 'Mililitros'),
+        (LITERS, 'Litros'),
+        (UNITS, 'Unidades'),
+    )
+    unit_type = models.CharField(max_length=2, choices=UNITTYPE, default='u', verbose_name="Tipo de unidad")
 
     class Meta:
         verbose_name = "Producto"
@@ -192,15 +195,15 @@ class Family(models.Model):
 
 class Inventory(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, verbose_name="Familia")
+    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, verbose_name="Familia")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
-        verbose_name = "Inventorio"
-        verbose_name_plural = "Inventorios"
+        verbose_name = "Inventario"
+        verbose_name_plural = "Inventarios"
 
     def __str__(self):
-        return str(self.id_product + ' ' + self.quantity)
+        return f'{self.id_product.description, self.quantity}'
 
 class Role(models.Model):
     role = models.CharField(max_length=40, null=False, verbose_name="Rol")
@@ -219,8 +222,8 @@ class FamilyVolunteer(models.Model):
     id_role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Rol")
 
     class Meta:
-        verbose_name = "Inventorio"
-        verbose_name_plural = "Inventorios"
+        verbose_name = "Integrante"
+        verbose_name_plural = "Integrantes"
 
     def __str__(self):
         return str(self.id_family + ' ' + self.id_volunteer)

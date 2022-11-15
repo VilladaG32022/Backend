@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 
 from CPLN.models import Lunch
 # Create your views here.
-class CalcLanch(TemplateView):
+class CalcLunch(TemplateView):
     template_name = "admin/lanch_calc.html"
 
     def get_context_data(self, **kwargs):

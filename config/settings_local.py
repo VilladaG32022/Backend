@@ -93,7 +93,7 @@ JAZZMIN_SETTINGS = {
     
     "hide_apps": ["contenttypes","sessions","admin"],
 
-    "hide_models": ["CPLN.Neighborhood", "CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.Donation", "CPLN.ProductDonation", "CPLN.Family", "CPLN.Inventory", "CPLN.Role", "CPLN.FamilyVolunteer", "CPLN.Withdrawal", "CPLN.WithdrawalDetail","auth.Permission", "auth.Group"],
+    "hide_models": ["CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.ProductDonation", "CPLN.Withdrawal", "CPLN.WithdrawalDetail", "CPLN.FamilyVolunteer", "CPLN.Ingredient", "CPLN.ProductType"],
 
     "icons": {
         "dashboard":"fa-house",
@@ -103,10 +103,11 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "darkly",
+    "theme": "pulse",
+    "dark_mode_theme": "darkly",
 }
 
-
+#,"auth.Permission", "auth.Group" "CPLN.Neighborhood", "CPLN.Donation", "CPLN.Family", "CPLN.Role",
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

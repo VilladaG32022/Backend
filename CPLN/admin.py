@@ -3,29 +3,19 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from .models import *
 from django.apps import apps
-from api.serializers import VolunteerSerializer
+from django.utils.html import format_html
     
 my_models = apps.get_models()
 
-
+#modeladmin
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "neighborhood")
+    list_display = ("last_name", "first_name", "neighborhood", "status")
     ordering = ("last_name",)
     list_filter = ("neighborhood",)
     list_display_links = ("last_name",)
-    #list_editable = ("status",)
+    list_editable = ("status",)
     list_per_page = 10
-    actions = ["add_volunteer"]
-
-    def add_volunteer(modeladmin, request, queryset):
-        for candidate in queryset:
-            serializeobj = VolunteerSerializer(data=candidate)
-            if serializeobj.is_valid():
-                VolunteerSerializer(candidate).save()
-                candidate.delete()
-
-#modeladmin
 
 
 @admin.register(New)
@@ -34,12 +24,23 @@ class NewAdmin(admin.ModelAdmin):
     list_filter = ("title",)
     list_per_page = 5
 
-# Register your models here.
-
 class IngredientInline(admin.StackedInline):
     extra = 1
     model = Ingredient
-from django.utils.html import format_html
+
+class FamilyVolunteerInline(admin.StackedInline):
+    extra = 1
+    model = FamilyVolunteer
+
+class InventoryInline(admin.StackedInline):
+    extra = 1
+    model = Inventory
+
+@admin.register(Family)
+class FamilyAdmin(admin.ModelAdmin):
+    inlines =  (FamilyVolunteerInline, InventoryInline)
+    list_display = ('name',)
+
 @admin.register(Lunch)
 class LunchAdmin(admin.ModelAdmin):
     def action(self, obj):
@@ -48,6 +49,8 @@ class LunchAdmin(admin.ModelAdmin):
         return format_html(f'<a href="/calc-lunch/{obj.id}">Calcular menu</a>')
     inlines =  (IngredientInline, )
     list_display = ('description', 'action')
+
+# Register your models here.
 
 
 
