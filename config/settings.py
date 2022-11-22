@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
-import django.apps
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -113,11 +112,14 @@ JAZZMIN_UI_TWEAKS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9a4rvtpmg98jl',
+        'USER': 'npepwancfjngkw',
+        'PASSWORD': '138fddf18ba988034dfa0beab17219ee1d3a6cd0c15fad727afb3b0a732bb03b',
+        'HOST': 'ec2-52-200-5-135.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 LOGGING = {
     'version': 1,

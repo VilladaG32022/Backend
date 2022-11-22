@@ -95,6 +95,8 @@ JAZZMIN_SETTINGS = {
 
     "hide_models": ["CPLN.Origin", "CPLN.MonetaryDonation", "CPLN.ProductDonation", "CPLN.Withdrawal", "CPLN.WithdrawalDetail", "CPLN.FamilyVolunteer", "CPLN.Ingredient", "CPLN.ProductType"],
 
+    "order_with_respect_to": ["auth", "CPLN", "CPLN.New", "CPLN.Lunch", "CPLN.Product", "CPLN.Donation", "CPLN.Candidate", "CPLN.Volunteer", "CPLN.Family", "CPLN.ListFood"],
+
     "icons": {
         "dashboard":"fa-house",
     },

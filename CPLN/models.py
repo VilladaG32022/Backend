@@ -12,6 +12,10 @@ numeric = RegexValidator(r'^[0-9]*$', 'Solamente está permitido usar caracteres
 class Neighborhood(models.Model):
     neighborhood = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name = "Barrio"
+        verbose_name_plural = "Barrios"
+
     def __str__(self):
         return str(self.neighborhood)
 
@@ -92,20 +96,9 @@ class Origin(models.Model):
     def __str__(self):
         return str(self.description)
 
-class MonetaryDonation(models.Model):
-    amount = models.IntegerField(verbose_name="Monto")
-    id_origin = models.ForeignKey(Origin, on_delete=models.CASCADE, verbose_name="Orígen")
-
-    class Meta:
-        verbose_name = "Donación monetaria"
-        verbose_name_plural = "Donaciones monetarias"
-
-    def __str__(self):
-        return str(self.amount)
-
 class Donation(models.Model):
     donator = models.CharField(max_length=40, default="Anónimo", verbose_name="Donante")
-    datetime = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de donación")
+    date = models.DateField(auto_now=True, verbose_name="Fecha de donación")
 
     class Meta:
         verbose_name = "Donación"
@@ -113,6 +106,18 @@ class Donation(models.Model):
 
     def __str__(self):
         return str(self.donator)
+
+class MonetaryDonation(models.Model):
+    amount = models.IntegerField(verbose_name="Monto")
+    origin = models.ForeignKey(Origin, on_delete=models.CASCADE, verbose_name="Orígen")
+    donation = models.ForeignKey(Donation, on_delete=models.CASCADE, null=True, verbose_name="Donación")
+
+    class Meta:
+        verbose_name = "Donación monetaria"
+        verbose_name_plural = "Donaciones monetarias"
+
+    def __str__(self):
+        return str(self.amount)
 
 class ProductType(models.Model):
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
@@ -132,7 +137,7 @@ class Product(models.Model):
     UNITS = 'u'
 
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
-    id_product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, verbose_name="Tipo de producto")
+    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, verbose_name="Tipo de producto")
     UNITTYPE = (
         (KILOGRAMS, 'Kilogramos'),
         (GRAMS, 'Gramos'),
@@ -151,15 +156,15 @@ class Product(models.Model):
 
 class ProductDonation(models.Model):
     quantity = models.IntegerField(verbose_name="Cantidad")
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_donation = models.ForeignKey(Donation, on_delete=models.CASCADE, verbose_name="Donación")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
+    donation = models.ForeignKey(Donation, on_delete=models.CASCADE, verbose_name="Donación")
 
     class Meta:
         verbose_name = "Donación de productos"
         verbose_name_plural = "Donaciones de productos"
 
     def __str__(self):
-        return str(self.id_product + ' ' + self.quantity)
+        return str(self.product + ' ' + self.quantity)
 
 class Lunch(models.Model):
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
@@ -172,8 +177,8 @@ class Lunch(models.Model):
         return str(self.description)
 
 class Ingredient(models.Model):
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_lunch = models.ForeignKey(Lunch, related_name = 'ingredients', on_delete=models.CASCADE, verbose_name="Almuerzo")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
+    lunch = models.ForeignKey(Lunch, related_name = 'ingredients', on_delete=models.CASCADE, verbose_name="Almuerzo")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
@@ -181,7 +186,7 @@ class Ingredient(models.Model):
         verbose_name_plural = "Ingredientes"
 
     def __str__(self):
-        return f'{self.id_product.description}'
+        return f'{self.product.description}'
 
 class Family(models.Model):
     name = models.CharField(max_length=40, null=False, verbose_name="Nombre")
@@ -194,8 +199,8 @@ class Family(models.Model):
         return str(self.name)
 
 class Inventory(models.Model):
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
-    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, verbose_name="Familia")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
+    family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, verbose_name="Familia")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
@@ -203,7 +208,7 @@ class Inventory(models.Model):
         verbose_name_plural = "Inventarios"
 
     def __str__(self):
-        return f'{self.id_product.description, self.quantity}'
+        return f'{self.product.description, self.quantity}'
 
 class Role(models.Model):
     role = models.CharField(max_length=40, null=False, verbose_name="Rol")
@@ -217,20 +222,20 @@ class Role(models.Model):
         return str(self.role)
 
 class FamilyVolunteer(models.Model):
-    id_volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, verbose_name="Voluntario")
-    id_family = models.ForeignKey(Family, on_delete=models.CASCADE, verbose_name="Familia")
-    id_role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Rol")
+    volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE, verbose_name="Voluntario")
+    family = models.ForeignKey(Family, on_delete=models.CASCADE, verbose_name="Familia")
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Rol")
 
     class Meta:
         verbose_name = "Integrante"
         verbose_name_plural = "Integrantes"
 
     def __str__(self):
-        return str(self.id_family + ' ' + self.id_volunteer)
+        return str(self.family + ' ' + self.volunteer)
 
 class Withdrawal(models.Model):
-    id_familygiver = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='dadora', verbose_name="Familia dadora")
-    id_familyreciever = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='receptora', verbose_name="Familia receptora")
+    familygiver = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='dadora', verbose_name="Familia dadora")
+    familyreciever = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='receptora', verbose_name="Familia receptora")
     datetime = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de retiro")
 
     class Meta:
@@ -238,11 +243,11 @@ class Withdrawal(models.Model):
         verbose_name_plural = "Retiros"
 
     def __str__(self):
-        return str(self.id_familygiver + '-' + self.id_familyreciever)
+        return str(self.familygiver + '-' + self.familyreciever)
 
 class WithdrawalDetail(models.Model):
-    id_withdrawal = models.ForeignKey(Withdrawal, on_delete=models.CASCADE, verbose_name="Retiro")
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
+    withdrawal = models.ForeignKey(Withdrawal, on_delete=models.CASCADE, verbose_name="Retiro")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Producto")
     quantity = models.IntegerField(verbose_name="Cantidad")
 
     class Meta:
@@ -250,4 +255,4 @@ class WithdrawalDetail(models.Model):
         verbose_name_plural = "Detalle de los retiros"
 
     def __str__(self):
-        return str(self.id_withdrawal)
+        return str(self.withdrawal)
