@@ -98,7 +98,7 @@ class Origin(models.Model):
 
 class Donation(models.Model):
     donator = models.CharField(max_length=40, default="Anónimo", verbose_name="Donante")
-    date = models.DateField(auto_now=True, verbose_name="Fecha de donación")
+    date = models.DateField(null=True, verbose_name="Fecha de donación")
 
     class Meta:
         verbose_name = "Donación"
@@ -132,9 +132,9 @@ class ProductType(models.Model):
 class Product(models.Model):
     KILOGRAMS = 'kg'
     GRAMS = 'gr'
-    MILLILITERS = 'mm'
+    MILLILITERS = 'ml'
     LITERS = 'lt'
-    UNITS = 'u'
+    UNITS = 'U'
 
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, verbose_name="Tipo de producto")
@@ -145,7 +145,7 @@ class Product(models.Model):
         (LITERS, 'Litros'),
         (UNITS, 'Unidades'),
     )
-    unit_type = models.CharField(max_length=2, choices=UNITTYPE, default='u', verbose_name="Tipo de unidad")
+    unit_type = models.CharField(max_length=2, choices=UNITTYPE, default='U', verbose_name="Tipo de unidad")
 
     class Meta:
         verbose_name = "Producto"
@@ -170,8 +170,8 @@ class Lunch(models.Model):
     description = models.CharField(max_length=40, null=False, verbose_name="Descripción")
 
     class Meta:
-        verbose_name = "Almuerzo"
-        verbose_name_plural = "Almuerzos"
+        verbose_name = "Menú"
+        verbose_name_plural = "Menús"
 
     def __str__(self):
         return str(self.description)
@@ -205,7 +205,7 @@ class Inventory(models.Model):
 
     class Meta:
         verbose_name = "Inventario"
-        verbose_name_plural = "Inventarios"
+        verbose_name_plural = "Inventario"
 
     def __str__(self):
         return f'{self.product.description, self.quantity}'
