@@ -1,36 +1,59 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls static admin_list jazzmin %}
-
-
+{% load i18n admin_urls static admin_list jazzmin inventory %}
 
 {% block extrahead %}
     {{ block.super }}
     {{ media.js }}
 {% endblock %}
 
-
-{% block content_title %} Calcular Menu {% endblock %}
+{% block content_title %} Calcular Menú {{lunch}} {% endblock %}
 
 {% block coltype %}flex{% endblock %}
 
-
 {% block content %}
-
-
     <div class="col-12">
 
         <form>
-                <input type="number" name="qty" value="{{qty}}">
-                <button>Enviar</button>
+                <input type="number" name="qty" value= {{quantity}}>
+                <select name="family" >
+                    <option value="none">Ninguna</option>
+                    {% for fly in families %}
+                        {% if family == fly.name %}
+                        <option value={{fly}} selected>{{fly}}</option>
+                        {% else %}
+                        <option value={{fly}}>{{fly}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <button>Calcular</button>
         </form>
 
-            {{lunch.description}}
-            <br class="clear"/>
-            {% for item in lunch.ingredients.all  %}
-                   {{item}} : {{item.quantity}} * {{qty}}
-            <br>
-            {% endfor %}
-
+        {% if quantity != 0 %}
+            {% if family == 'none' %}
+                {% for ingredient in lunch.ingredients.all %}
+                    {% Calculate ingredient.quantity quantity as qty_calculated %} 
+                    {{ ingredient }}
+                     : {{ ingredient.quantity }}{{ ingredient.product.unit_type }}
+                     : {{ qty_calculated }}{{ ingredient.product.unit_type }}
+                    <br>
+                {% endfor %}
+            {% else %}
+                {% for ingredient in lunch.ingredients.all %}
+                    {% Calculate ingredient.quantity quantity as qty_calculated %}
+                    {% GetFamilyInventory ingredient.product.id family as qty_inventory %}
+                    {% DiffInvQty qty_calculated qty_inventory as diff_qty %}
+                    {{ ingredient }}
+                     : {{ ingredient.quantity }}{{ ingredient.product.unit_type }}
+                     : {{ qty_calculated }}{{ ingredient.product.unit_type }}
+                     : {{ qty_inventory }}{{ ingredient.product.unit_type }}
+                    {% if diff_qty < 0 %}
+                        Se necesitan {{ diff_qty|positive }}{{ ingredient.product.unit_type }}
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        
         <br class="clear"/>
     </div>
 {% endblock %}
