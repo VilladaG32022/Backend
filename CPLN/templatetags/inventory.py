@@ -20,3 +20,11 @@ def DiffInvQty(qty_calculated, qty_inventory):
 @register.filter
 def positive(value):
     return int(value) * -1
+
+@register.filter
+def replace_space(string):
+    return string.replace(" ", "_")
+
+@register.filter
+def replace_lowbar(string):
+    return string.replace("_", " ")

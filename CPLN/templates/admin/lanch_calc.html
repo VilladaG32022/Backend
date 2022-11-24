@@ -11,49 +11,74 @@
 {% block coltype %}flex{% endblock %}
 
 {% block content %}
+
     <div class="col-12">
 
-        <form>
-                <input type="number" name="qty" value= {{quantity}}>
-                <select name="family" >
+        <form class="w-50 d-flex flex-column my-4">
+            <div class="d-flex justify-content-between">
+                <label for="quantity_input">Cantidad de Menús</label>
+                <label for="family_input" class="pr-4">Inventario de Familia</label>
+                <p></p>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+
+                <input id="quantity_input" type="number" name="qty" value={{quantity}}>
+                <select name="family" class="pr-5 ml-5">
                     <option value="none">Ninguna</option>
                     {% for fly in families %}
-                        {% if family == fly.name %}
-                        <option value={{fly}} selected>{{fly}}</option>
-                        {% else %}
-                        <option value={{fly}}>{{fly}}</option>
-                        {% endif %}
+                    {% if family|replace_lowbar == fly.name %}
+                    <option value={{fly.name|replace_space}} selected>{{fly}}</option>
+                    {% else %}
+                    <option value={{fly.name|replace_space}}>{{fly}}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
-                <button>Calcular</button>
+                <button class="btn btn-success ml-4">Calcular</button>
+            </div>
         </form>
 
         {% if quantity != 0 %}
-            {% if family == 'none' %}
-                {% for ingredient in lunch.ingredients.all %}
-                    {% Calculate ingredient.quantity quantity as qty_calculated %} 
-                    {{ ingredient }}
-                     : {{ ingredient.quantity }}{{ ingredient.product.unit_type }}
-                     : {{ qty_calculated }}{{ ingredient.product.unit_type }}
-                    <br>
-                {% endfor %}
-            {% else %}
-                {% for ingredient in lunch.ingredients.all %}
-                    {% Calculate ingredient.quantity quantity as qty_calculated %}
-                    {% GetFamilyInventory ingredient.product.id family as qty_inventory %}
-                    {% DiffInvQty qty_calculated qty_inventory as diff_qty %}
-                    {{ ingredient }}
-                     : {{ ingredient.quantity }}{{ ingredient.product.unit_type }}
-                     : {{ qty_calculated }}{{ ingredient.product.unit_type }}
-                     : {{ qty_inventory }}{{ ingredient.product.unit_type }}
-                    {% if diff_qty < 0 %}
-                        Se necesitan {{ diff_qty|positive }}{{ ingredient.product.unit_type }}
-                    {% endif %}
-                    <br>
-                {% endfor %}
-            {% endif %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Ingrediente</th>
+                <th scope="col">Cantidad por Unidad</th>
+                <th scope="col">Cantidad Necesaria</th>
+                {% if family != 'none' %}
+                <th scope="col">Cantidad Disponible en Inventario</th>
+                <th scope="col">Cantidad que Falta</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+                {% if family == 'none' %}
+                    {% for ingredient in lunch.ingredients.all %}
+                        {% Calculate ingredient.quantity quantity as qty_calculated %}
+                        <tr>
+                            <td>{{ ingredient }}</td>
+                            <td>{{ ingredient.quantity }}{{ ingredient.product.unit_type }}</td>
+                            <td>{{ qty_calculated }}{{ ingredient.product.unit_type }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for ingredient in lunch.ingredients.all %}
+                        {% Calculate ingredient.quantity quantity as qty_calculated %}
+                        {% GetFamilyInventory ingredient.product.id family|replace_lowbar as qty_inventory %}
+                        {% DiffInvQty qty_calculated qty_inventory as diff_qty %}
+                        <tr>
+                            <td>{{ ingredient }}</td>
+                            <td>{{ ingredient.quantity }}{{ ingredient.product.unit_type }}</td>
+                            <td>{{ qty_calculated }}{{ ingredient.product.unit_type }}</td>
+                            <td>{{ qty_inventory }}{{ ingredient.product.unit_type }}</td>
+                        {% if diff_qty < 0 %}
+                            <td>Se necesitan {{ diff_qty|positive }}{{ ingredient.product.unit_type }}</td>
+                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
         {% endif %}
-        
         <br class="clear"/>
     </div>
 {% endblock %}
