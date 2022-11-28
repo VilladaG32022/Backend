@@ -96,6 +96,17 @@ class Origin(models.Model):
     def __str__(self):
         return str(self.description)
 
+class MonetaryDonation(models.Model):
+    amount = models.IntegerField(verbose_name="Monto")
+    origin = models.ForeignKey(Origin, on_delete=models.CASCADE, verbose_name="Orígen")
+
+    class Meta:
+        verbose_name = "Donación monetaria"
+        verbose_name_plural = "Donaciones monetarias"
+
+    def __str__(self):
+        return str(self.amount)
+
 class Donation(models.Model):
     donator = models.CharField(max_length=40, default="Anónimo", verbose_name="Donante")
     date = models.DateField(null=True, verbose_name="Fecha de donación")
