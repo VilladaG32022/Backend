@@ -52,8 +52,8 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
-    'https://https://deploy-front-beta.vercel.app/voluntario'
-    'https://https://deploy-front-beta.vercel.app'
+    'https://deploy-front-beta.vercel.app/voluntario'
+    'https://deploy-front-beta.vercel.app'
     'bit.ly/cocinamos'
 )
 
