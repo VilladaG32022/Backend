@@ -56,6 +56,7 @@ CORS_ORIGIN_WHITELIST = (
     'https://deploy-front-beta.vercel.app',
     'bit.ly/cocinamos',
     'https://deploy-front-git-eze-villadag32022.vercel.app/',
+    'https://deploy-front-h3oxul8hv-villadag32022.vercel.app/',
 )
 
 ROOT_URLCONF = 'config.urls'
